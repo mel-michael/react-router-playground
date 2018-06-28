@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -9,14 +9,11 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">React Router Playground</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
 
         <Router>
-          <div>
+          <div className="navlink">
             <ul>
               <li>
                 <Link to="/">Home</Link>
@@ -27,21 +24,14 @@ class App extends Component {
               <li>
                 <Link to="/topics">Topics</Link>
               </li>
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
             </ul>
 
             <hr />
 
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/about" component={About} />
-              <Route path="/topics" component={Topics} />
-              {/* <Route path="/:id" component={Child} /> */}
-              <Route path="/dashboard" component={Dashboard} />
-              <Route component={NotFound} />
-            </Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/topics" component={Topics} />
+
           </div>
 
         </Router>
@@ -50,7 +40,7 @@ class App extends Component {
   }
 }
 
-const Home = () => 'We are home';
+const Home = () => <h2>We are home</h2>;
 
 const About = () => (
   <div>
@@ -58,37 +48,10 @@ const About = () => (
   </div>
 );
 
-const Topics = () => (<div><h2>I am all about the topics</h2></div>);
-
-const Child = ({ match }) => (
+const Topics = () => (
   <div>
-    { console.log('match:', match) }
-    <h3>ID: {match.params.id}</h3>
+    <h2>I am all about the topics</h2>
   </div>
 );
-
-const Dashboard = () => (
-  <div>
-    <h2>Dashboard Page</h2>
-  </div>
-);
-
-const Status = ({ code, children }) => (
-  <Route render={({ staticContext }) => {
-    console.log('Static', staticContext, code, children);
-    if (staticContext)
-      staticContext.status = code
-    return children
-  }} />
-)
-
-const NotFound = () => (
-  <Status code={404}>
-    <div>
-      <h1>Sorry, can’t find that.</h1>
-    </div>
-  </Status>
-)
-
 
 export default App;

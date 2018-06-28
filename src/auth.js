@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,6 +7,30 @@ import {
   withRouter
 } from "react-router-dom";
 
+////////////////////////////////////////////////////////////
+// 1. Click the public page
+// 2. Click the protected page
+// 3. Log in
+// 4. Click the back button, note the URL each time
+
+const AuthComponent = () => (
+  <Router>
+    <div>
+      <AuthButton />
+      <ul>
+        <li>
+          <Link to="/public">Public Page</Link>
+        </li>
+        <li>
+          <Link to="/protected">Protected Page</Link>
+        </li>
+      </ul>
+      <Route path="/public" component={Public} />
+      <Route path="/login" component={Login} />
+      <PrivateRoute path="/protected" component={Protected} />
+    </div>
+  </Router>
+);
 
 const fakeAuth = {
   isAuthenticated: false,
@@ -71,7 +95,7 @@ class Login extends React.Component {
   };
 
   render() {
-    console.log('match', this.props);
+    console.log('props:::', this.props, '\n state', this.state);
     const { from } = this.props.location.state || { from: { pathname: "/" } };
     const { redirectToReferrer } = this.state;
 
@@ -87,3 +111,5 @@ class Login extends React.Component {
     );
   }
 }
+
+export default AuthComponent;

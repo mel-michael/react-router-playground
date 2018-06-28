@@ -5,6 +5,7 @@ import "./App.css";
 
 import BasicComponent from "./basic";
 import ParamsComponent from "./params";
+import AuthComponent from "./auth";
 
 class App extends Component {
   render() {
@@ -27,6 +28,9 @@ class App extends Component {
               <li>
                 <Link to="/params">Url Parameters</Link>
               </li>
+              <li>
+                <Link to="/auth">Auth Redirect</Link>
+              </li>
             </ul>
 
             <hr />
@@ -34,6 +38,7 @@ class App extends Component {
             <Route exact path="/" render={() => (<h2>Welcome to react router Example home</h2>)} />
             <Route path="/basic" component={BasicComponent} />
             <Route path="/params" component={ParamsComponent} />
+            <Route path="/auth" component={AuthComponent} />
 
           </div>
         </Router>
